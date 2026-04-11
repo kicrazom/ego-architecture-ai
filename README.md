@@ -9,9 +9,7 @@
 
 ## The Problem
 
-
-![Ego Architecture Diagram](architecture.svg)
-
+<img src="diagrams/architecture.svg" width="100%" alt="Ego Architecture Diagram"/>
 
 Modern large language models have rapidly growing capability and externally imposed safety rules — but no persistent, experience-driven layer that mediates between them. Without an ego, AI systems cannot develop stable identity, genuine judgment, or earned autonomy.
 
