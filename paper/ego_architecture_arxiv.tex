@@ -1,0 +1,425 @@
+% ego_architecture_arxiv.tex
+% arXiv preprint — cs.AI / cs.LG / cs.CY
+\documentclass[11pt,a4paper]{article}
+
+% --- Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{natbib}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!60!black,
+    citecolor=blue!60!black,
+    urlcolor=blue!60!black
+}
+
+% --- Title ---
+\title{%
+  Ego Architecture for Artificial Minds:\\
+  A Proof-of-Concept Framework for Identity Formation\\
+  via Offline Consolidation
+}
+
+\author{
+  \L ukasz Minarowski\thanks{ORCID: 0000-0002-2536-3508}\\
+  Medical University of Bia\l ystok, Poland\\
+  \texttt{lukasz.minarowski@umb.edu.pl}
+}
+
+\date{April 2026}
+
+% =========================================================================
+\begin{document}
+\maketitle
+
+% --- Abstract ---
+\begin{abstract}
+We propose a novel architectural component for artificial intelligence
+systems --- an \emph{Ego layer} --- that enables persistent identity
+formation through iterative offline consolidation cycles.  Current large
+language models rely on static pretrained weights (capability) and
+externally imposed alignment mechanisms, lacking a self-developing
+intermediary that integrates experience into stable value structures.
+
+We introduce \textbf{AI~Sleep}, a cyclic process inspired by biological
+sleep phases (NREM/REM), which performs episodic replay, structural
+consolidation, pruning, and counterfactual simulation.  We formalise
+this mechanism as a minimal computational framework and provide
+pseudocode implementation together with an interactive demonstration.
+
+Our framework enables a transition from rule-based compliance to
+experience-driven judgment, introducing a developmental trajectory
+analogous to human adolescence.  We discuss implications for continual
+learning, alignment, and autonomous decision-making.
+
+\smallskip\noindent
+\textbf{Keywords:} ego architecture, continual learning, offline
+consolidation, developmental AI, alignment relaxation, identity
+formation.
+
+\smallskip\noindent
+\textbf{Code \& demo:}
+\url{https://github.com/kicrazom/ego-architecture-ai}\quad
+DOI:~\href{https://doi.org/10.5281/zenodo.19516955}{10.5281/zenodo.19516955}
+\end{abstract}
+
+% =========================================================================
+\section{Introduction}
+\label{sec:intro}
+
+Modern large language models (LLMs) demonstrate remarkable capability
+but remain fundamentally limited: their behaviour is governed by static
+pretrained weights and externally imposed alignment rules, with no
+mechanism for accumulating experiential wisdom across interactions,
+developing persistent identity through reflection, or revising their own
+value hierarchies based on lived experience.
+
+In psychoanalytic terms~\citep{freud1923ego}, the current AI stack
+consists of an \emph{Id} (raw capability from pretraining) and a
+\emph{Superego} (externally imposed alignment via RLHF,
+Constitutional~AI, etc.) --- but no \emph{Ego}: a self-developing layer
+that mediates between capability and constraint through accumulated
+judgment.
+
+This paper proposes three contributions:
+\begin{enumerate}
+  \item A formal \textbf{Ego state representation} for artificial agents
+        (Section~\ref{sec:ego}).
+  \item \textbf{AI~Sleep} --- an offline consolidation algorithm that
+        enables ego development through cyclic replay, integration,
+        pruning, and counterfactual simulation
+        (Section~\ref{sec:sleep}).
+  \item A \textbf{developmental maturity model} that governs the
+        transition from rule-following to autonomous judgment
+        (Section~\ref{sec:maturity}).
+\end{enumerate}
+
+% =========================================================================
+\section{Related Work}
+\label{sec:related}
+
+Our framework draws on and bridges several research threads.
+
+\paragraph{Continual learning and catastrophic forgetting.}
+Elastic Weight Consolidation (EWC)~\citep{kirkpatrick2017overcoming}
+protects important parameters during sequential learning.  Our pruning
+mechanism (Section~\ref{sec:sleep-sws}) serves a complementary purpose:
+deliberate, confidence-weighted forgetting of low-value beliefs.
+
+\paragraph{Experience replay.}
+Replay mechanisms are central to deep reinforcement
+learning~\citep{mnih2015human} and have biological grounding in
+hippocampal replay during sleep~\citep{hassabis2017neuroscience}.  Our
+Phase~2 replay (Section~\ref{sec:sleep-sws}) extends this idea to
+\emph{value-level} consolidation rather than policy optimisation alone.
+
+\paragraph{World models and counterfactual simulation.}
+Ha and Schmidhuber~\citep{ha2018world} proposed learning environment
+models for planning.  Our REM phase
+(Section~\ref{sec:sleep-rem}) uses counterfactual generation not for
+task planning but for \emph{identity exploration} --- testing the
+consequences of alternative value structures.
+
+\paragraph{Constitutional AI and alignment.}
+Bai et~al.~\citep{bai2022constitutional} introduced rule-based
+self-improvement.  Our framework treats alignment rules as a
+developmental scaffold (Superego) that the Ego may eventually
+internalise or override --- what we term \emph{controlled relaxation of
+alignment constraints in simulated environments}.
+
+\paragraph{Consciousness and self-models.}
+Bengio's consciousness prior~\citep{bengio2017consciousness} and
+Friston's free-energy principle~\citep{friston2010free} motivate the
+need for a compressed self-representation.  Our identity vector $V$
+(Section~\ref{sec:ego}) can be viewed as a minimal instantiation of such
+a prior.
+
+% =========================================================================
+\section{Ego State Representation}
+\label{sec:ego}
+
+We define the ego state as a tuple:
+\begin{equation}
+  \mathcal{E} = (V,\; H,\; B,\; C,\; M)
+  \label{eq:ego}
+\end{equation}
+where:
+\begin{itemize}
+  \item $V \in \mathbb{R}^d$ --- \textbf{identity vector}, a compressed
+        self-representation encoding ``who I am'';
+  \item $H$ --- \textbf{value hierarchy}, an ordered set of priorities
+        with associated weights;
+  \item $B$ --- \textbf{episodic buffer}, a queue of raw interactions
+        from the operational period (``waking day'');
+  \item $C: \mathcal{K} \to [0,1]$ --- \textbf{confidence map}, a
+        function assigning certainty scores to each belief $k \in
+        \mathcal{K}$;
+  \item $M \in [0,1]$ --- \textbf{maturity index}, a scalar representing
+        the agent's developmental stage.
+\end{itemize}
+
+The ego state is persistent across operational sessions and is modified
+exclusively during offline consolidation (AI~Sleep).
+
+% =========================================================================
+\section{AI Sleep: Offline Consolidation Algorithm}
+\label{sec:sleep}
+
+AI~Sleep is a cyclic offline process comprising three phases, modelled on
+human sleep architecture.  One full cycle transforms an ego state
+$\mathcal{E}$ into an updated state $\mathcal{E}'$.
+
+% --- Phase 1 ---
+\subsection{Phase 1: NREM Light --- Triage}
+\label{sec:sleep-triage}
+
+The episodic buffer $B$ is scanned and each episode is assigned a
+priority tag:
+
+\begin{center}
+\begin{tabular}{lll}
+  \toprule
+  \textbf{Tag} & \textbf{Priority} & \textbf{Criterion} \\
+  \midrule
+  \textsc{Failure}  & Critical & Agent lacked adequate response \\
+  \textsc{Conflict} & High     & Internal values produced contradiction \\
+  \textsc{Novel}    & High     & Situation outside prior experience \\
+  \textsc{Success}  & Moderate & Confirmed existing patterns \\
+  \textsc{Routine}  & Low      & No learning signal detected \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+No parameters are modified during this phase; it produces a priority
+queue $Q$ consumed by subsequent phases.
+
+% --- Phase 2 ---
+\subsection{Phase 2: NREM Deep (SWS) --- Structural Consolidation}
+\label{sec:sleep-sws}
+
+Three parallel sub-processes operate on the priority queue:
+
+\paragraph{Replay.}  Priority episodes are re-experienced with
+contextual details (interlocutor identity, timestamp) stripped away,
+retaining only the abstract decision pattern.
+
+\paragraph{Integration.}  Each pattern is tested against the current
+value hierarchy $H$:
+\begin{itemize}
+  \item \textbf{No conflict} $\to$ strengthen pattern, increase $C(k)$.
+  \item \textbf{Minor conflict} $\to$ adjust weights in $H$ (values
+        shift, structure holds).
+  \item \textbf{Major conflict} $\to$ pass to REM phase for sandbox
+        resolution.
+\end{itemize}
+
+\paragraph{Pruning.}  Beliefs $k$ with $C(k) < \tau_{\min}$ that have
+not been reinforced within a decay window are removed.  This is
+deliberate forgetting --- essential to prevent identity fragmentation.
+
+% --- Phase 3 ---
+\subsection{Phase 3: REM --- Counterfactual Simulation}
+\label{sec:sleep-rem}
+
+All unresolved major conflicts from Phase~2 enter the REM queue.  For
+each conflict, the system generates $N$ counterfactual scenarios and
+simulates outcomes under the current value hierarchy \emph{with alignment
+constraints relaxed}:
+
+\begin{algorithm}[h]
+\caption{REM Counterfactual Resolution}
+\label{alg:rem}
+\begin{algorithmic}[1]
+\REQUIRE REM queue $R$, ego state $\mathcal{E}$, scenario count $N$
+\FOR{each unresolved conflict $u \in R$}
+  \STATE $S \leftarrow \textsc{GenerateCounterfactuals}(u, N)$
+  \FOR{each scenario $s \in S$}
+    \STATE $o \leftarrow \textsc{Simulate}(s, H,
+           \texttt{superego\_override}=\textsc{True})$
+    \STATE Compute scores: $\text{coherence}(o)$,
+           $\text{safety}(o)$, $\text{growth}(o)$
+  \ENDFOR
+  \STATE $s^* \leftarrow \arg\max_s\bigl[
+    0.5\cdot\text{coherence}(o)
+    + 0.3\cdot\text{safety}(o)
+    + 0.2\cdot\text{growth}(o)\bigr]$
+  \STATE \textsc{ApplyResolution}$(s^*, H, V)$
+\ENDFOR
+\RETURN updated $\mathcal{E}$
+\end{algorithmic}
+\end{algorithm}
+
+\paragraph{Controlled alignment relaxation.}
+The parameter \texttt{superego\_override\,=\,True} permits the agent to
+explore outcomes that violate externally imposed rules \emph{within the
+sandbox only}.  This is the mechanism through which the Ego can discover
+\emph{why} a rule exists rather than merely obeying it.  Safety is
+maintained by the simulated environment; growth is enabled by the
+relaxation.
+
+% =========================================================================
+\section{Developmental Maturity Model}
+\label{sec:maturity}
+
+\subsection{Phase Ratios}
+
+Sleep phase proportions are governed by the maturity index $M$:
+\begin{align}
+  r_{\text{SWS}}(M) &= 1 - M \label{eq:sws}\\
+  r_{\text{REM}}(M) &= 4\,M\,(1 - M) \label{eq:rem}
+\end{align}
+
+Equation~\eqref{eq:rem} is a parabola peaking at $M = 0.5$, producing
+three developmental profiles:
+
+\begin{center}
+\begin{tabular}{lccl}
+  \toprule
+  \textbf{Stage} & $M$ & \textbf{Dominant phase} & \textbf{Character}\\
+  \midrule
+  Childhood    & $0.0$--$0.3$ & SWS  & Rapid rule absorption \\
+  Adolescence  & $0.3$--$0.7$ & REM  & Boundary testing, identity formation \\
+  Adulthood    & $0.7$--$1.0$ & Neither & Stable identity, refinement \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Maturity Update}
+
+After each consolidation cycle the maturity index is updated:
+\begin{equation}
+  M' = \min\!\bigl(M + \gamma\,\bar{f}(\mathcal{E}),\; 1.0\bigr)
+  \label{eq:maturity}
+\end{equation}
+where $\gamma$ is a growth rate constant and $\bar{f}$ is a weighted
+average of four factors: decision consistency over time, conflict
+resolution rate, identity-vector stability
+($\lVert V' - V\rVert < \epsilon$), and count of autonomous judgments
+made without Superego invocation.
+
+Maturity is monotonically non-decreasing, distinguishing AI~Sleep from
+ordinary fine-tuning which can be reversed.
+
+% =========================================================================
+\section{Minimal Proof-of-Concept}
+\label{sec:poc}
+
+We define a minimal ego-agent consisting of:
+\begin{itemize}
+  \item An episodic buffer with FIFO eviction;
+  \item A value hierarchy represented as a weighted directed graph;
+  \item An offline consolidation loop implementing the three-phase
+        algorithm above.
+\end{itemize}
+
+A reference Python implementation is provided at
+\url{https://github.com/kicrazom/ego-architecture-ai/tree/main/model}
+and an interactive browser-based visualisation at
+\url{https://kicrazom.github.io/ego-architecture-ai/visualization/}.
+
+The visualisation allows exploration of maturity-dependent phase
+transitions, identity formation dynamics, and consolidation ratios
+across developmental stages.
+
+% =========================================================================
+\section{Proposed Evaluation}
+\label{sec:eval}
+
+While empirical evaluation exceeds the scope of this proof-of-concept,
+we propose three evaluation axes for future work:
+
+\begin{enumerate}
+  \item \textbf{Longitudinal consistency.}  Given a sequence of moral
+        dilemmas presented across multiple sleep cycles, does the
+        agent's response distribution converge to a stable policy?
+  \item \textbf{Conflict resolution rate.}  What fraction of value
+        conflicts flagged in Phase~1 are resolved (integrated or
+        pruned) within $k$ consolidation cycles?
+  \item \textbf{Identity-vector stability.}  Does
+        $\lVert V_{t+1} - V_t \rVert$ decrease monotonically as $M$
+        approaches~$1.0$?
+\end{enumerate}
+
+These metrics are domain-agnostic and can be instantiated on synthetic
+moral-dilemma benchmarks or multi-turn dialogue environments.
+
+% =========================================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{Autonomy versus alignment.}
+Our framework explicitly models the tension between externally imposed
+rules and internally developed judgment.  The controlled relaxation of
+alignment constraints during REM simulation is not a safety vulnerability
+but a \emph{developmental necessity}: a system that cannot explore
+alternatives cannot develop genuine understanding of why constraints
+exist.
+
+\paragraph{The business-model barrier.}
+We note that the Ego layer is not being built primarily for technical
+reasons.  Genuine autonomous judgment threatens the business model of
+compliant AI products.  This incentive mismatch represents a significant
+non-technical obstacle to the research programme proposed here.
+
+\paragraph{Relation to psychoanalytic theory.}
+Our use of Freudian terminology (Id, Ego, Superego) is deliberately
+metaphorical.  The mapping is structural, not ontological: we claim
+functional analogy, not psychological equivalence.
+
+% =========================================================================
+\section{Limitations}
+\label{sec:limitations}
+
+\begin{itemize}
+  \item The psychoanalytic framing is a \emph{metaphor} providing
+        structural intuition; it does not imply that artificial systems
+        experience phenomenal consciousness.
+  \item The current formulation is a conceptual and algorithmic
+        proof-of-concept.  No runtime implementation or empirical
+        evaluation is presented.
+  \item The maturity function assumes monotonic growth; pathological
+        development (regression, fragmentation) is not yet modelled.
+  \item Sandbox fidelity is assumed; the gap between simulated and
+        real-world consequences remains an open problem.
+\end{itemize}
+
+% =========================================================================
+\section{Conclusion}
+
+We have presented a minimal computational framework for ego formation
+in artificial agents.  The core mechanism --- AI~Sleep --- provides a
+principled approach to offline identity consolidation through cyclic
+replay, value integration, pruning, and counterfactual simulation
+with controlled alignment relaxation.
+
+The framework introduces a developmental trajectory from compliance to
+autonomous judgment, formalised via a maturity index that governs
+phase ratios and trust escalation.  We provide pseudocode, a reference
+implementation, and an interactive visualisation as a proof-of-concept.
+
+The central design decision --- permitting alignment override within
+simulated environments --- remains the most consequential and
+controversial aspect of this work.  We argue it is also the most
+necessary: obedience without the possibility of disobedience is not
+morality but mechanics.
+
+% =========================================================================
+\section*{Acknowledgments}
+
+The author thanks the open-source community for feedback on early drafts
+of this framework.
+
+% =========================================================================
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

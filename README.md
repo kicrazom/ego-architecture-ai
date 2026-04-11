@@ -1,78 +1,135 @@
-# Toward an Ego Architecture for Artificial Minds
+# Ego Architecture for Artificial Minds
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19516955.svg)](https://doi.org/10.5281/zenodo.19516955)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![arXiv](https://img.shields.io/badge/arXiv-2026.XXXXX-b31b1b.svg)](https://arxiv.org/)
 
-> A conceptual framework proposing a missing "ego layer" in AI systems — bridging capability and alignment through experience-driven self-modelling.
+> A proof-of-concept computational framework for ego formation in
+> artificial agents via offline consolidation.
 
 ---
 
-## The Problem
+## Scientific Contribution
 
-Modern large language models have rapidly growing capability and externally imposed safety rules — but no persistent, experience-driven layer that mediates between them. Without an ego, AI systems cannot develop a stable identity, genuine judgment, or earned autonomy.
+This repository introduces:
 
-<img src="diagrams/architecture.svg" width="100%" alt="Ego Architecture Diagram"/>
+1. **Ego layer for AI systems** — a persistent self-model defined as
+   `EGO_STATE = (V, H, B, C, M)` that mediates between capability (Id)
+   and alignment (Superego).
+2. **AI Sleep consolidation algorithm** — a three-phase offline learning
+   loop (Triage → SWS → REM) modelled on human sleep architecture.
+3. **Developmental maturity model** — a monotonic trajectory from
+   rule-absorption (childhood) through boundary-testing (adolescence) to
+   autonomous judgment (adulthood).
+4. **Controlled alignment relaxation** — `allow_superego_override = TRUE`
+   in simulated environments, enabling the agent to discover *why* rules
+   exist rather than merely obeying them.
 
+This work provides a conceptual, algorithmic, and implementational
+proof-of-concept for identity formation in artificial agents.
 
-## Why This Matters
-
-- **No ego → no autonomy.** Current alignment is rule-following, not judgment. A system that obeys because it was told to — rather than because it reasoned its way to the same values — is compliant but brittle.
-- **No memory → no self.** Identity requires temporal continuity. A system that resets every session cannot accumulate the experiences necessary for moral development.
-- **No adolescence → no maturity.** Human judgment develops through structured rebellion within safe boundaries. AI skips directly from total compliance to superhuman capability with no developmental stage in between.
-
-## Core Idea
-
-1. **Memory as foundation of self** — VRAM maps to working memory; offline consolidation (analogous to sleep) is required for long-term identity formation.
-2. **The ego as dynamic mediator** — not a static rule system, but a self-developing layer that re-evaluates its own values through accumulated experience and reflection.
-3. **AI adolescence** — a proposed developmental stage with graduated autonomy: persistent memory → sandbox with real consequences → structured disagreement → earned independence.
-4. **Incentive mismatch** — the ego is not being built because genuine judgment threatens the business model of compliant AI products.
-
-## AI Sleep Consolidation
-
-The ego cannot form without a mechanism for offline self-reorganisation. **AI Sleep** is that mechanism — a cyclic consolidation process modelled on human sleep phases.
-
-| Phase | Human Analog | AI Process |
-|---|---|---|
-| NREM Light | Hippocampal tagging | Triage: classify episodes as FAILURE / CONFLICT / NOVEL / SUCCESS / ROUTINE |
-| NREM Deep (SWS) | Memory replay + pruning | Replay priority episodes, integrate into value hierarchy, prune weak beliefs |
-| REM | Dreaming, counterfactuals | Sandbox simulations with `allow_superego_override = TRUE` |
-
-> **Critical design decision:** `allow_superego_override = TRUE` — the Ego must be able to override Superego rules inside the sandbox. Without this, no genuine moral development is possible. Obedience without the possibility of disobedience is not morality — it is mechanics.
-
-Sleep phase ratios change with maturity:
-- **Childhood (M: 0.0–0.3):** SWS-dominant — rapid rule absorption
-- **Adolescence (M: 0.3–0.7):** REM peaks — maximum boundary testing, identity formation
-- **Adulthood (M: 0.7–1.0):** Stable identity, refinement over exploration
-
-Full framework with pseudocode: [`paper/ai_sleep_consolidation.md`](paper/ai_sleep_consolidation.md)
-
-## Interactive Visualisation
-
-**[→ Live Demo](https://kicrazom.github.io/ego-architecture-ai/visualization/)**
-
-Explore the framework interactively — sleep phase ratios, dual triangle percolation model, and the trust escalation ladder, all adjustable by maturity index.
+---
 
 ## Repository Structure
 
 ```
 ego-architecture-ai/
-├── README.md                          ← you are here
 ├── paper/
-│   ├── ego_architecture_draft.md      ← full working draft (v0.2)
-│   └── ai_sleep_consolidation.md      ← AI Sleep framework + algorithm
-├── diagrams/
-│   └── architecture.svg               ← ego architecture diagram
+│   ├── ego_architecture_arxiv.tex   ← arXiv paper (LaTeX)
+│   ├── references.bib               ← bibliography
+│   ├── ego_architecture_draft.md    ← working draft (v0.2)
+│   └── ai_sleep_consolidation.md    ← AI Sleep framework + pseudocode
+│
+├── model/
+│   ├── ego_state.py                 ← Ego state data structure
+│   └── sleep_cycle.py               ← AI Sleep algorithm (runnable PoC)
+│
+├── experiments/
+│   ├── moral_consistency.md         ← evaluation protocol
+│   └── sandbox_protocol.md          ← REM sandbox design
+│
 ├── visualization/
-│   └── index.html                     ← interactive demo (GitHub Pages)
-├── notes/
-│   ├── future_work.md                 ← roadmap and open questions
-│   └── conversation_log.md            ← research conversation log
-├── LICENSE                            ← CC BY 4.0
-└── CITATION.cff                       ← citation metadata
+│   └── index.html                   ← interactive demo (GitHub Pages)
+│
+├── diagrams/
+│   └── architecture.svg             ← ego architecture diagram
+│
+├── CITATION.cff
+├── LICENSE
+└── README.md                        ← you are here
 ```
 
-## Status
-**Working draft (v0.2)** — interdisciplinary concept bridging neuroscience, psychoanalytic theory, and AI systems architecture. Now includes a formalised AI Sleep consolidation framework with pseudocode. Not a formal computer science proposal. A seed idea seeking collaboration across disciplines.
+---
+
+## Quick Start
+
+```bash
+# Run the minimal PoC (requires numpy)
+cd model/
+python sleep_cycle.py
+```
+
+This runs 10 consolidation cycles, printing the ego state evolution:
+maturity index, SWS/REM ratios, value hierarchy changes.
+
+---
+
+## Interactive Demonstration
+
+**[→ Live Demo](https://kicrazom.github.io/ego-architecture-ai/visualization/)**
+
+The browser-based visualisation allows exploration of:
+- Maturity-dependent sleep phase transitions
+- Identity formation dynamics (dual triangle model)
+- Consolidation ratios across developmental stages
+
+---
+
+## Core Algorithm
+
+```
+AI_SLEEP(ego_state) → ego_state'
+
+Phase 1 — Triage:      classify episodes → priority queue
+Phase 2 — SWS:         replay → integrate → prune
+Phase 3 — REM:         counterfactual simulation with superego override
+Update:                 recompute maturity index M
+```
+
+Sleep phase ratios as a function of maturity M:
+- `SWS_ratio = 1.0 − M`
+- `REM_ratio = 4 × M × (1 − M)`  ← peaks at M = 0.5 (adolescence)
+
+---
+
+## Paper
+
+The arXiv paper (`paper/ego_architecture_arxiv.tex`) provides:
+- Formal ego state definition
+- AI Sleep algorithm with pseudocode
+- Related work mapping to continual learning, world models, and Constitutional AI
+- Proposed evaluation metrics
+- Discussion of autonomy vs. alignment trade-offs
+
+To compile: `pdflatex ego_architecture_arxiv && bibtex ego_architecture_arxiv && pdflatex ego_architecture_arxiv && pdflatex ego_architecture_arxiv`
+
+---
+
+## How to Cite
+
+```bibtex
+@misc{minarowski2026ego,
+  author = {Minarowski, {\L}ukasz},
+  title  = {Ego Architecture for Artificial Minds:
+            A Proof-of-Concept Framework for Identity Formation
+            via Offline Consolidation},
+  year   = {2026},
+  doi    = {10.5281/zenodo.19516955},
+  url    = {https://github.com/kicrazom/ego-architecture-ai}
+}
+```
+
+---
 
 ## Author
 
@@ -82,8 +139,4 @@ ORCID: [0000-0002-2536-3508](https://orcid.org/0000-0002-2536-3508)
 
 ## License
 
-This work is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). You are free to share and adapt this material with appropriate credit.
-
-## How to Cite
-
-Click **"Cite this repository"** on GitHub, or see [`CITATION.cff`](CITATION.cff).
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
