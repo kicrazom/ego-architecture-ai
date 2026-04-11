@@ -6,9 +6,9 @@ authors:
   - family-names: "Minarowski"
     given-names: "Łukasz"
     orcid: "https://orcid.org/0000-0002-2536-3508"
-    affiliation: "Medical University of Białystok, Poland"
+    affiliation: "Department of Respiratory Physiopathology, Medical University of Białystok, Poland"
 date-released: "2026-04-11"
-version: "0.1"
+version: "0.2"
 license: "CC-BY-4.0"
 keywords:
   - artificial intelligence
