@@ -1,5 +1,8 @@
 # Toward an Ego Architecture for Artificial Minds
 
+![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+
 > A conceptual framework proposing a missing "ego layer" in AI systems — bridging capability and alignment through experience-driven self-modeling.
 
 ---
