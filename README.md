@@ -45,7 +45,7 @@ Modern large language models have rapidly growing capability and externally impo
 ego-architecture-ai/
 ├── README.md                          ← you are here
 ├── paper/
-│   └── ego_architecture_draft.md      ← full working draft (v0.1)
+│   └── ego_architecture_draft.md      ← full working draft (v0.2)
 ├── diagrams/
 │   └── architecture.svg              ← ego architecture diagram
 ├── notes/
