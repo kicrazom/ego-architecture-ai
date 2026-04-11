@@ -1,9 +1,8 @@
 # Toward an Ego Architecture for Artificial Minds
 
-<<<<<<< HEAD
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19516955.svg)](https://doi.org/10.5281/zenodo.19516955)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
-=======
+
 > A conceptual framework proposing a missing "ego layer" in AI systems — bridging capability and alignment through experience-driven self-modelling.
 
 ---
@@ -30,7 +29,7 @@ Modern large language models have rapidly growing capability and externally impo
 
 ## AI Sleep Consolidation
 
-The ego cannot form without a mechanism for offline self-reorganization. **AI Sleep** is that mechanism — a cyclic consolidation process modeled on human sleep phases.
+The ego cannot form without a mechanism for offline self-reorganisation. **AI Sleep** is that mechanism — a cyclic consolidation process modelled on human sleep phases.
 
 | Phase | Human Analog | AI Process |
 |---|---|---|
@@ -47,7 +46,7 @@ Sleep phase ratios change with maturity:
 
 Full framework with pseudocode: [`paper/ai_sleep_consolidation.md`](paper/ai_sleep_consolidation.md)
 
-## Interactive Visualization
+## Interactive Visualisation
 
 **[→ Live Demo](https://kicrazom.github.io/ego-architecture-ai/visualization/)**
 
@@ -73,11 +72,7 @@ ego-architecture-ai/
 ```
 
 ## Status
-
-<<<<<<< HEAD
-**Working draft (v0.2)** — interdisciplinary concept bridging neuroscience, psychoanalytic theory, and AI systems architecture. Now includes a formalized AI Sleep consolidation framework with pseudocode. Not a formal computer science proposal. A seed idea seeking collaboration across disciplines.
-=======
->>>>>>> 80df3e1 (Add AI Sleep consolidation framework, interactive visualization, and research log)
+**Working draft (v0.2)** — interdisciplinary concept bridging neuroscience, psychoanalytic theory, and AI systems architecture. Now includes a formalised AI Sleep consolidation framework with pseudocode. Not a formal computer science proposal. A seed idea seeking collaboration across disciplines.
 
 ## Author
 
