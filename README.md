@@ -2,8 +2,6 @@
 
 <<<<<<< HEAD
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19516955.svg)](https://doi.org/10.5281/zenodo.19516955)
-
->>>>>> 80df3e1 (Add AI Sleep consolidation framework, interactive visualization, and research log)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 =======
 > A conceptual framework proposing a missing "ego layer" in AI systems — bridging capability and alignment through experience-driven self-modelling.
