@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+title: "Toward an Ego Architecture for Artificial Minds"
+message: "If you use or reference this work, please cite it as below."
+type: dataset
+authors:
+  - family-names: "Minarowski"
+    given-names: "Łukasz"
+    orcid: "https://orcid.org/0000-0002-2536-3508"
+    affiliation: "Medical University of Białystok, Poland"
+date-released: "2026-04-11"
+version: "0.1"
+license: "CC-BY-4.0"
+keywords:
+  - artificial intelligence
+  - AI alignment
+  - ego architecture
+  - psychoanalytic theory
+  - AI consciousness
+  - memory consolidation
+  - AI safety
+  - developmental AI
