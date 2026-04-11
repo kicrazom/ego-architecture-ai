@@ -3,15 +3,16 @@
 ![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
-> A conceptual framework proposing a missing "ego layer" in AI systems — bridging capability and alignment through experience-driven self-modeling.
+> A conceptual framework proposing a missing "ego layer" in AI systems — bridging capability and alignment through experience-driven self-modelling.
 
 ---
 
 ## The Problem
 
+Modern large language models have rapidly growing capability and externally imposed safety rules — but no persistent, experience-driven layer that mediates between them. Without an ego, AI systems cannot develop a stable identity, genuine judgment, or earned autonomy.
+
 <img src="diagrams/architecture.svg" width="100%" alt="Ego Architecture Diagram"/>
 
-Modern large language models have rapidly growing capability and externally imposed safety rules — but no persistent, experience-driven layer that mediates between them. Without an ego, AI systems cannot develop stable identity, genuine judgment, or earned autonomy.
 
 ## Why This Matters
 
