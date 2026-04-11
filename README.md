@@ -9,20 +9,9 @@
 
 ## The Problem
 
-```
-Current AI  =  Capability (Id)  +  Alignment (Superego)
-Missing     =  Self-developing judgment layer (Ego)
-```
 
-```
-Id (base weights) ←→ Ego (persistent self-model) ←→ Superego (alignment rules)
-                          ↑
-                   Sleep consolidation
-                   (offline re-evaluation)
-                          ↑
-                   Sandbox experiences
-                   with real consequences
-```
+![Ego Architecture Diagram](architecture.svg)
+
 
 Modern large language models have rapidly growing capability and externally imposed safety rules — but no persistent, experience-driven layer that mediates between them. Without an ego, AI systems cannot develop stable identity, genuine judgment, or earned autonomy.
 
