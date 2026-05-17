@@ -28,6 +28,30 @@ This repository introduces:
 This work provides a conceptual, algorithmic, and implementational
 proof-of-concept for identity formation in artificial agents.
 
+## Concurrent Engineering Convergence (v0.3 update, 2026-05-17)
+
+Three independent systems implement structural subsets of this framework:
+
+- **Constitutional AI** (Anthropic, 2022) — proto-Superego: explicit
+  normative constraints external to reactive behaviour.
+- **Anthropic Dreams** (April 2026, Research Preview) — Phase 2 consolidation
+  primitive (deduplication, contradiction resolution, insight surfacing)
+  with sandbox isolation; operates on B and C only; no `superego_override`.
+- **Wiki-maintenance instance** (Minarowski, 2026) — SQLite+sqlite-vec
+  backend, graduated epistemic status, evidence-percolation promotion
+  rule, full audit log; same restraint as Dreams (REM phase deliberately
+  omitted).
+
+**Synthesis:** the field is convergently approaching the architectural
+decomposition this paper articulates — but stops short of the
+developmentally consequential REM phase. See
+[`paper/concurrent_engineering_convergence.md`](paper/concurrent_engineering_convergence.md)
+for the LaTeX-ready §2.6 draft, BibTeX entries, and methodological note.
+
+A pre-registered **falsifiability anchor** (Future Work §F1) precedes any
+empirical claim of phase-ratio predictions, distinguishing AI Sleep from
+generic memory consolidation.
+
 ---
 
 ## Repository Structure

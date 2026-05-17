@@ -10,8 +10,8 @@ related_projects:
   - "[[capno-nome]]"
 papers: []
 tags: [project/active, domain/ai-architecture, domain/research]
-claude_import: "[[Claude/projects/ego_architecture_ai/project]]"
-claude_memory: "[[Claude/projects/ego_architecture_ai/project-memory]]"
+claude_import: "[[Claude/projects/ego_architecture_ai/ego_architecture_ai]]"
+claude_memory: "[[Claude/projects/ego_architecture_ai/ego_architecture_ai-memory]]"
 ---
 
 # EGO Architecture AI

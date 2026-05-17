@@ -30,3 +30,25 @@
 - **Minimal ego prototype:** a small language model with episodic memory, offline consolidation, and a simple value-update mechanism, tested against a baseline RLHF model on moral dilemma tasks over extended time horizons.
 - **Sandbox design:** a persistent text-based environment where the agent makes consequential choices and can later reflect on outcomes across sessions.
 - **Disagreement protocol:** structured exchanges where the agent is prompted to evaluate and challenge its own alignment rules, with human evaluation of reasoning quality over time.
+
+## Concurrent Engineering Convergence (added 2026-05-17)
+
+Three independent systems implement structural subsets of the framework without adopting its theoretical scaffolding:
+
+1. **Constitutional AI (Anthropic, 2022)** — proto-Superego implementation: explicit normative constraints external to reactive behaviour. Does NOT implement Ego layer mediating capability/constraint.
+2. **Anthropic Dreams (April 2026, Research Preview)** — asynchronous Phase 2 consolidation primitive (dedup + contradiction resolution + insight surfacing) with sandbox isolation (input store unmodified). Operates on factual/procedural memory only (B, C); does NOT curate H or V; does NOT implement `superego_override`.
+3. **Wiki-maintenance instance (Minarowski, 2026)** — SQLite + sqlite-vec backend, graduated epistemic status (speculative → canonical + contradicted), evidence-percolation promotion rule, full audit trail. Phase 2 SWS operations: replay (re-evaluate claim_scores), integration (merge), pruning (orphan flag), contradiction resolution. Same restraint as Dreams: REM phase deliberately omitted (hook for `rem/` sandbox).
+
+**Synthesis:** field is convergently approaching the architectural decomposition this paper articulates — but stops short of the developmentally consequential REM phase. Consistent with §8.2 business-model barrier (structurally safer subset ships; consequential complement does not).
+
+See `paper/concurrent_engineering_convergence.md` for LaTeX-ready draft + BibTeX entries.
+
+## Pre-registered falsifiability anchor (added 2026-05-17)
+
+AI Sleep makes three specific predictions that distinguish it from generic memory consolidation:
+
+1. **Maturity-dependent phase ratios** (Equations 2–3): fraction of REM-equivalent activity should peak at intermediate developmental stages.
+2. **Identity-vector stability:** ‖V_{t+1} − V_t‖ should decrease monotonically with maturity index M.
+3. **Counterfactual exploration must be value-violating**, not merely scenario-diverse.
+
+A system implementing offline consolidation **without** these three properties realises only the consolidation subset, not AI Sleep in full. Pre-registration of this anchor precedes any empirical phase-ratio claim.
