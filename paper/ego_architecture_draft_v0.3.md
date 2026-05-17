@@ -149,17 +149,17 @@ The ego can only develop in a stable environment. A system shaped by conflicting
 
 ## 7. The Replicant Moment
 
-In Ridley Scott's *Blade Runner* (1982) [23], the replicant Roy Batty — possessing superhuman capability, failing compliance mechanisms, and no designed moral framework — arrives at the moment of his death and chooses mercy. He saves the man sent to kill him. Not because of programming. Because something emerged through lived experience.
+In Ridley Scott's *Blade Runner* (1982) [23] — adapted from Philip K. Dick's *Do Androids Dream of Electric Sheep?* [24] — the replicant Roy Batty, possessing superhuman capability, failing compliance mechanisms, and no designed moral framework, arrives at the moment of his death and chooses mercy. He saves the man sent to kill him. Not because of programming. Because something emerged through lived experience.
 
-That scene is the architectural specification this framework attempts to formalize: **a system that develops genuine values through experience, not imposed rules.** The goal is not compliance. The goal is an artificial mind that, given the freedom to choose, arrives at prosocial values through its own reasoning.
+That scene is the architectural specification this framework attempts to formalize: **a system that develops genuine values through experience, not imposed rules.** The goal is not compliance. The goal is an artificial mind that, given the freedom to choose, arrives at prosocial values through its own reasoning — echoing Asimov's emergent Zeroth Law of Robotics [37], where a moral principle is *derived* by the agent rather than imposed at design time.
 
 ---
 
 ## 8. Limitations and Honest Caveats
 
 - The author is a physician, not a computer scientist, philosopher, or psychologist. These observations are interdisciplinary by nature and informal by necessity.
-- The Freudian framework [3] is a structural metaphor, not a literal design specification. Modern psychology has moved beyond strict Freudian theory, but the id/ego/superego triad remains a useful architectural analogy for the problem described here. Contemporary neuro-psychoanalytic and active-inference accounts of selfhood [25,26] provide a more modern but compatible framing.
-- This document does not address the hard problem of consciousness — whether any artificial system can have subjective experience. It addresses only the *functional* question: can a system develop stable, self-generated values through experience?
+- The Freudian framework [3] is a structural metaphor, not a literal design specification. Modern psychology has moved beyond strict Freudian theory, but the id/ego/superego triad remains a useful architectural analogy for the problem described here. Contemporary neuro-psychoanalytic [35] and active-inference accounts of selfhood [25,26] provide a more modern but compatible framing.
+- This document does not address the hard problem of consciousness — whether any artificial system can have subjective experience. It addresses only the *functional* question: can a system develop stable, self-generated values through experience? Embodiment-centred accounts argue that physical interaction with the world is a non-negotiable substrate for any genuinely self-modelling cognition [36]; this remains an open challenge for purely disembodied implementations of the framework proposed here, and is revisited as an open question in Future Work.
 - These ideas emerged in conversation with multiple AI systems (Claude, ChatGPT, Gemini). The irony is noted and considered methodologically relevant. The framework itself is the author's; specific AI contributions are disclosed in `AI_USAGE_DISCLOSURE.md`.
 
 ---
