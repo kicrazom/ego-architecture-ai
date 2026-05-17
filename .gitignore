@@ -1,3 +1,7 @@
 
 # Claude.ai conversation history backup (local-only)
 history/
+
+# Working drafts pre-submission (recipient links only, not searchable)
+paper/ego_architecture_draft_v*.md
+paper/ego_architecture_draft.md
