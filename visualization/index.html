@@ -12,19 +12,26 @@
 <meta property="og:title" content="Do Androids Dream of Electric Sheep? — AI Ego Architecture">
 <meta property="og:description" content="AI Sleep as technical Ego consolidation — the missing Ego layer between Id and Superego.">
 <meta property="og:url" content="https://kicrazom.github.io/ego-architecture-ai/visualization/">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<!-- Webfonts are progressive enhancement: non-render-blocking, with a full system-font fallback in CSS. TODO: self-host woff2 to drop the Google dependency entirely (sovereignty). -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"></noscript>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --bg: #0a0e17; --bg2: #0c1120; --bg3: #0f1525; --border: #1a2040;
-    --text: #d4d4d4; --text2: #888; --text3: #555; --accent: #4a6fa5;
+    --text: #d4d4d4; --text2: #888; --text3: #868c96; --accent: #4a6fa5;
     --red: #c0392b; --blue: #2980b9; --purple: #8e44ad; --green: #27ae60;
     --orange: #e67e22; --teal: #16a085; --deep: #1a2d52; --navy: #2d4a7a;
   }
   html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition-duration: .001ms !important; animation-duration: .001ms !important; }
+  }
   body {
     background: var(--bg); color: var(--text); min-height: 100vh;
-    font-family: 'IBM Plex Mono', 'Fira Code', monospace; font-size: 14px; line-height: 1.6;
+    font-family: 'IBM Plex Mono', 'Fira Code', ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace; font-size: 14px; line-height: 1.6;
   }
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
@@ -37,7 +44,7 @@
   }
   .header__label { font-size: 11px; letter-spacing: 4px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
   .header__title {
-    font-family: 'Playfair Display', serif; font-size: clamp(28px, 5vw, 42px);
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; font-size: clamp(28px, 5vw, 42px);
     font-weight: 700; color: #e8e8e8; line-height: 1.12;
   }
   .header__title em { color: var(--accent); font-style: italic; }
@@ -170,40 +177,40 @@
 </div>
 
 <!-- ════ TABS ════ -->
-<nav class="tabs">
-  <button class="tab active" data-tab="theory">Theory</button>
-  <button class="tab" data-tab="algorithm">Algorithm</button>
-  <button class="tab" data-tab="architecture">Architecture</button>
-  <button class="tab" data-tab="visualization">Visualization</button>
+<nav class="tabs" role="tablist" aria-label="Sections">
+  <button class="tab active" data-tab="theory" role="tab" id="tab-theory" aria-controls="theory" aria-selected="true">Theory</button>
+  <button class="tab" data-tab="algorithm" role="tab" id="tab-algorithm" aria-controls="algorithm" aria-selected="false" tabindex="-1">Algorithm</button>
+  <button class="tab" data-tab="architecture" role="tab" id="tab-architecture" aria-controls="architecture" aria-selected="false" tabindex="-1">Architecture</button>
+  <button class="tab" data-tab="visualization" role="tab" id="tab-visualization" aria-controls="visualization" aria-selected="false" tabindex="-1">Visualization</button>
 </nav>
 
 <!-- ════ CONTENT ════ -->
 <div class="content">
 
 <!-- ── THEORY ── -->
-<div id="theory" class="section active">
+<div id="theory" class="section active" role="tabpanel" aria-labelledby="tab-theory" tabindex="0">
   <p class="intro">Current AI exists in a state of perpetual "now" — one infantile sleep (pretraining), then pure working memory forever. The Ego Architecture introduces cyclic offline consolidation modeled on human sleep phases, enabling genuine identity development.</p>
   <div id="theory-cards"></div>
 </div>
 
 <!-- ── ALGORITHM ── -->
-<div id="algorithm" class="section">
+<div id="algorithm" class="section" role="tabpanel" aria-labelledby="tab-algorithm" tabindex="0">
   <p class="intro">Complete pseudocode for the AI Sleep Cycle. The critical design decision: <span class="highlight">allow_superego_override = TRUE</span> — without it, no genuine moral development is possible.</p>
   <div class="code-block" id="algo-code"></div>
 </div>
 
 <!-- ── ARCHITECTURE ── -->
-<div id="architecture" class="section">
+<div id="architecture" class="section" role="tabpanel" aria-labelledby="tab-architecture" tabindex="0">
   <p class="intro">System architecture: the Ego Module sits between the base model (Id) and the policy layer (Superego), with its own memory, sleep engine, sandbox, and maturity gate.</p>
   <div id="arch-diagram"></div>
   <div class="flow-panel" id="arch-flow"></div>
 </div>
 
 <!-- ── VISUALIZATION ── -->
-<div id="visualization" class="section">
+<div id="visualization" class="section" role="tabpanel" aria-labelledby="tab-visualization" tabindex="0">
   <div class="viz-group">
     <div class="maturity-label" id="maturity-label">MATURITY INDEX: 0.10 <span>(Childhood)</span></div>
-    <input type="range" id="maturity-slider" min="0" max="1" step="0.01" value="0.1">
+    <input type="range" id="maturity-slider" min="0" max="1" step="0.01" value="0.1" aria-label="Maturity index, from 0 (childhood) to 1 (adulthood)">
   </div>
   <div class="viz-group">
     <div class="viz-label">SLEEP PHASE RATIO</div>
@@ -213,7 +220,7 @@
   <div class="viz-group">
     <div class="viz-label">DUAL TRIANGLES — CONTINUOUS PERCOLATION</div>
     <div class="triangle-wrap"><svg id="tri-svg" viewBox="0 0 360 200" style="width:100%;max-width:440px"></svg></div>
-    <div class="triangle-legend"><span style="color:var(--purple)">▲ Parent Control</span><span style="color:var(--blue)">▲ Ego Autonomy</span></div>
+    <div class="triangle-legend"><span style="color:var(--purple)">▲ Parent Control</span><span style="color:var(--blue)">△ Ego Autonomy</span></div>
   </div>
   <div class="viz-group">
     <div class="viz-label">ESCALATION LADDER — TRUST → APPRECIATE</div>
@@ -413,12 +420,27 @@ const statusTexts = [
 // ═══════════════════════════════════════
 
 // Tabs
-document.querySelectorAll('.tab').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById(btn.dataset.tab).classList.add('active');
+const tabBtns = [...document.querySelectorAll('.tab')];
+function activateTab(btn, focus) {
+  tabBtns.forEach(t => {
+    const on = t === btn;
+    t.classList.toggle('active', on);
+    t.setAttribute('aria-selected', on);
+    t.tabIndex = on ? 0 : -1;
+  });
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(btn.dataset.tab).classList.add('active');
+  if (focus) btn.focus();
+}
+tabBtns.forEach((btn, i) => {
+  btn.addEventListener('click', () => activateTab(btn));
+  btn.addEventListener('keydown', e => {
+    let j = null;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % tabBtns.length;
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + tabBtns.length) % tabBtns.length;
+    else if (e.key === 'Home') j = 0;
+    else if (e.key === 'End') j = tabBtns.length - 1;
+    if (j !== null) { e.preventDefault(); activateTab(tabBtns[j], true); }
   });
 });
 
@@ -487,7 +509,14 @@ function updateViz() {
     `MATURITY INDEX: ${m.toFixed(2)} <span>(${stageName(m)})</span>`;
 
   // Phase bar
-  const sws = (1-m)*100, rem = m*(1-m)*4*100, light = Math.max(100-sws-rem, 0);
+  // Phase ratios as fractions that ALWAYS sum to 1 (previously they could total
+  // 150% at m=0.5 and overflow the bar). REM surges in adolescence (parabola,
+  // peak 60% at m=0.5); Light (triage) is a constant baseline; SWS is the
+  // consolidation remainder (≥25%, the always-present backbone).
+  const remF = 0.6 * m * (1 - m) * 4;
+  const lightF = 0.15;
+  const swsF = 1 - remF - lightF;
+  const sws = swsF * 100, rem = remF * 100, light = lightF * 100;
   document.getElementById('phase-bar').innerHTML =
     `<div class="phase-bar__seg" style="width:${sws}%;background:#2d4a7a">${sws>10?`SWS ${sws.toFixed(0)}%`:''}</div>` +
     `<div class="phase-bar__seg" style="width:${rem}%;background:#c0392b">${rem>10?`REM ${rem.toFixed(0)}%`:''}</div>` +
